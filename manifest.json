@@ -1,0 +1,12 @@
+{
+  "name": "Cooldown",
+  "version": "0",
+  "browser_action": {
+    "default_icon": "img/mini.png",
+    "default_title": "CD",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "bg.html"
+  }
+}
