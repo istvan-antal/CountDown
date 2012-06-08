@@ -29,7 +29,7 @@ function update() {
 
     diff = Math.floor((d2.getTime() - d1.getTime()) / 1000);
     
-    r = diff / (3600 * 8.5);
+    r = diff / (3600 * (parseInt(CD.get('amountHour'), 10) + parseInt(CD.get('amountMinute'), 10) / 60));
                 
     CD.drawCircle(circle, r, CD.getColor(r));
                 

@@ -19,6 +19,17 @@
 var CD;
 
 CD = {
+    init: function () {
+        if (!CD.get('version')) {
+            CD.set('version', 1);
+            
+            CD.set('targetHour', '16');
+            CD.set('targetMinute', '30');
+            
+            CD.set('amountHour', '16');
+            CD.set('amountMinute', '30');
+        }
+    },
     colorTransition: function (value, colors) {
         var range;
         
@@ -43,13 +54,18 @@ CD = {
     drawCircle: function (circle, r, color) {
         var ctx = circle.getContext('2d');
         
-        ctx.clearRect(0,0, circle.width, circle.height)
+        ctx.clearRect(0,0, circle.width, circle.height);
+        
+        ctx.fillStyle = "rgb(190, 190, 190)"; 
+        ctx.arc(Math.round(circle.width / 2), Math.round(circle.height / 2), Math.floor(Math.min(circle.width / 2, circle.height / 2)),  0, 2 * Math.PI, false);
+        ctx.fill();
+        
         ctx.fillStyle = "rgb(" + color.r +"," + color.g + "," + color.b + ")";  
         ctx.beginPath();
         ctx.moveTo(Math.round(circle.width / 2), Math.round(circle.height / 2));
         ctx.arc(Math.round(circle.width / 2), Math.round(circle.height / 2), Math.floor(Math.min(circle.width / 2, circle.height / 2)),  (2 - 2 * r + 1.5)  * Math.PI, (2 + 1.5) * Math.PI, false);
         ctx.moveTo(Math.round(circle.width / 2), Math.round(circle.height / 2));
-        ctx.fill();
+        ctx.fill();        
     },
     leadZ: function (i) {
         if (String(i).length < 2) {

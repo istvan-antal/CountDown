@@ -18,8 +18,10 @@
  */
 $(function () {
     var hour = $('#hour'),
-    minute = $('#minute'),
-    i;
+        minute = $('#minute'),
+        amountHour = $('#thour'),
+        amountMinute = $('#tminute'),
+        i;
                 
     for (i = 0; i < 24; i += 1) {
         hour.append('<option value="' + i + '">' + CD.leadZ(i) + '</option>');
@@ -28,9 +30,20 @@ $(function () {
     for (i = 0; i < 60; i += 1) {
         minute.append('<option value="' + i + '">' + CD.leadZ(i) + '</option>');
     }
+    
+    for (i = 0; i < 24; i += 1) {
+        amountHour.append('<option value="' + i + '">' + i + '</option>');
+    }
+                
+    for (i = 0; i < 60; i += 1) {
+        amountMinute.append('<option value="' + i + '">' + i + '</option>');
+    }
                 
     hour.val(CD.get('targetHour'));
     minute.val(CD.get('targetMinute'));
+    
+    amountHour.val(CD.get('amountHour'));
+    amountMinute.val(CD.get('amountMinute'));
                 
     hour.change(function () {
         CD.set('targetHour', $(this).val());
@@ -39,23 +52,12 @@ $(function () {
     minute.change(function () {
         CD.set('targetMinute', $(this).val());
     });
+    
+    amountHour.change(function () {
+        CD.set('amountHour', $(this).val());
+    });
+                                
+    amountMinute.change(function () {
+        CD.set('amountMinute', $(this).val());
+    });
 });
-            
-$(function () {
-    var d1 = new Date(),
-        d2 = new Date(),
-        circle = document.getElementById('circle'),
-        ctx = circle.getContext('2d'),
-        r,
-        diff;
-
-    d2.setHours(CD.get('targetHour'), CD.get('targetMinute'), 0, 0);
-
-    diff = Math.floor((d2.getTime() - d1.getTime()) / 1000);
-
-    document.getElementById('indicator').innerHTML = Math.floor(diff / 3600) + 'h ' + Math.floor((diff % 3600) / 60) + ' min' ;
-
-    r = diff / (3600 * 8.5);
-
-    CD.drawCircle(circle, r, CD.getColor(r));
-})
